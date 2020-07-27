@@ -1,10 +1,8 @@
 <div class="kit-combobox">
-	<div
-		*ngIf="optionValue"
-		class="kit-combobox-value"
-		(click)="opened = !opened"
-	>
-		{{ optionValue.text }}
+	<div (click)="opened = !opened">
+		<ng-diy-ui-combobox-option class="kit-combobox-value">{{
+			optionValue ? optionValue.text : ""
+		}}</ng-diy-ui-combobox-option>
 	</div>
 	<div
 		*ngIf="groups.length !== 0"

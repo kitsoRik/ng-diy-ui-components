@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, HostBinding } from "@angular/core";
 
 export type NgDiyUiTextTags =
 	| "h1"
@@ -17,9 +17,13 @@ export type NgDiyUiTextType = "title" | "subtitle" | "text";
 	styleUrls: ["./ng-diy-ui-text.component.scss"],
 })
 export class NgDiyUiTextComponent implements OnInit {
-	@Input("text") text: string = "";
 	@Input("type") type: NgDiyUiTextTags | NgDiyUiTextType = "text";
 	@Input("align") align: "left" | "center" | "right" = "left";
+
+	@HostBinding("style.color") styleColor: string = "black;";
+	@Input("color") set(color: string) {
+		this.styleColor = color;
+	}
 
 	constructor() {}
 

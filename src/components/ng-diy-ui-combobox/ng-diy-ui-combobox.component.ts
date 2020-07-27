@@ -7,6 +7,7 @@ import {
 	ElementRef,
 	AfterContentChecked,
 	OnChanges,
+	ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 import { NgDiyUiComboboxOptionComponent } from "./ng-diy-ui-combobox-option/ng-diy-ui-combobox-option.component";
@@ -71,7 +72,6 @@ export class NgDiyUiComboboxComponent
 		if (value === this._value) return;
 
 		this._value = value;
-		this.onChange(value);
 	}
 
 	get optionValue(): NgDiyUiComboboxOptionComponent {
@@ -92,6 +92,7 @@ export class NgDiyUiComboboxComponent
 
 	ngAfterContentChecked() {
 		this._sss.toArray().forEach((option) => {
+			// option.active = true;
 			option.onClick = () => {
 				this.selectOption(option);
 			};
@@ -113,7 +114,8 @@ export class NgDiyUiComboboxComponent
 	}
 
 	selectOption(option: NgDiyUiComboboxOptionComponent) {
-		this.value = option.value;
 		this.opened = false;
+		this.onChange(option.value);
+		this._value = option.value;
 	}
 }
